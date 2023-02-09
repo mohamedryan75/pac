@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+    
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    </head>
+    <style>
+      *{
+        margin: 0;
+      }
+      form input{
+        border-radius: 3px;
+        outline: 0;
+        border: 0;
+        height: 30px;
+        width: 200px;
+        background-color: rgb(167, 164, 154); 
+      }
+      form{
+      text-align: center;
+    }
+        
+      
+     
+     .task{
+      margin: 20px auto 20px auto;
+      width: 300px;;
+      border-bottom: 2px solid wheat;
+      background-color: rgb(167, 164, 154);
+      padding:12px;
+      display: flex;
+      justify-content: space-between;
+      color: blanchedalmond;
+      cursor: pointer;
+      border-radius:3%;
+     }
+     .task:hover{
+      width:320px;
+      transition: 0.3s linear;
+     }
+     .dn{
+      display: none;
+     }
+    /* .orange{
+      color: orange;
+      opacity: 1;
+     }
+     */
+     .change-text{
+      text-decoration: line-through;
+      text-decoration-style: wavy;
+     }
+     i.fa-face-angry{
+      color: orange;
+      font-size:20px;
+      
+      
+     }
+     i.fa-face-angry:hover{
+      font-size:23px;
+      transition: 0.3s linear;
+     }
+     .fa-star{
+      color: gray;
+      font-size:20px;
+     }
+     .fa-star:hover{
+      color: gray;
+      font-size:23px;
+      transition: 0.3s linear;
+     }
+     
+     .fa-star.orange{
+      color: orange;
+      
+     }
+     .fa-trash-can{
+      font-size:20px;
+      opacity: 0.4;
+
+     }
+     .fa-trash-can:hover{
+      font-size:23px;
+      transition: 0.3s linear;
+     }
+     form button{
+      border-radius: 3px;
+        outline: 0;
+        border: 0;
+        height: 30px;
+        background-color: red;
+        color: blanchedalmond;
+     }
+   body{
+    background: linear-gradient(90deg,grey,rgb(104, 102, 102));
+   }
+    h1{
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 33px;
+      font-weight: 20px;
+      margin-top: 50px;
+      color: blanchedalmond;
+    }
+    .fa-heart{
+      color: red;
+      font-size:20px;
+    }
+    .fa-heart:hover{
+      font-size:23px;
+      transition: 0.3s linear;
+    }
+   
+    </style>
+    <body>
+      <h1>to-do list</h1>
+      <section>
+   <div class="task">
+    <i class="fa-sharp fa-solid fa-star"></i>
+    <p class="text"> task1</p>
+    <div>
+    <i class="fa-solid fa-trash-can"></i>
+    <i class="fa-sharp fa-solid fa-face-angry"></i>
+  </div>
+   </div>
+   <div class="task">
+    <i class="fa-sharp fa-solid fa-star"></i>
+    <p class="text"> task2</p>
+    <div>
+    <i class="fa-solid fa-trash-can"></i>
+    <i class="fa-sharp fa-solid fa-face-angry"></i>
+  </div>
+   </div>
+  </section>
+  <form>
+  <input type="text" id="input" placeholder="enter name">
+  <button type="submit">upload</button>
+</form>
+
+      
+    </body>
+    <script>
+      let input=document.getElementById("input");
+      let but=document.querySelector("button");
+      let container=document.querySelector("section");
+      let form=document.querySelector("form")
+      
+     container.addEventListener("click",(eo)=>{
+      
+     if (eo.target.className==="fa-solid fa-trash-can") {
+         eo.target.parentElement.parentElement.remove();
+     } else if (eo.target.className==="fa-sharp fa-solid fa-face-angry") {
+             eo.target.classList.add("dn");
+      let hart=`<i class="fa-solid fa-heart"></i>`;
+      eo.target.parentElement.parentElement.getElementsByClassName("text")[0].classList.add("change-text")
+      eo.target.parentElement.innerHTML+=hart;
+     }if(eo.target.className==="fa-sharp fa-solid fa-star"){
+      eo.target.classList.toggle("orange");
+      container.prepend(eo.target.parentElement);
+     }
+     else if (eo.target.className==="fa-solid fa-heart") {
+      eo.target.parentElement.parentElement.getElementsByClassName("text")[0].classList.remove("change-text");
+      eo.target.classList.add("dn")
+      let addangry=`<i class="fa-sharp fa-solid fa-face-angry"></i>`
+      eo.target.parentElement.innerHTML+=addangry;
+     } 
+    
+    });
+    form.addEventListener("submit",(eo)=>{
+      eo.preventDefault();
+     let sit=` <div class="task">
+      <i class="fa-sharp fa-solid fa-star"></i>
+    <p class="text">${input.value}</p>
+    <div>
+    <i class="fa-solid fa-trash-can"></i>
+    <i class="fa-sharp fa-solid fa-face-angry"></i>
+  </div>`
+  container.innerHTML+=sit
+  input.value="";
+});
+    </script>
+</html>
